@@ -3,7 +3,6 @@ import asyncio
 from contextlib import suppress
 
 from aiogram import Bot, Dispatcher
-from aiogram.client.session.aiohttp import AiohttpSession
 
 from config import BOT_TOKEN
 from app.database.db import init_db, close_db
@@ -14,15 +13,7 @@ from app.services.reminders import reminder_loop
 
 
 async def main():
-    session = AiohttpSession(
-        proxy="http://127.0.0.1:10809"
-    )
-
-    bot = Bot(
-        token=BOT_TOKEN,
-        session=session,
-    )
-
+    bot = Bot(token=BOT_TOKEN)
     dp = Dispatcher()
 
     dp.include_router(client_router)
